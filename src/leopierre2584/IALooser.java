@@ -18,6 +18,7 @@ public class IALooser{
     public static int movechoice(Grille g){
         
         if (lastgrille!=null){
+            System.out.println("Lastgrillemarche");//débuggage
             if (lastgrille==g){
                 if ((abs(direction))==1){
                     direction = 2;
