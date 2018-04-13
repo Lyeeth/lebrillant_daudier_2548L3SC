@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
+import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
@@ -36,10 +37,18 @@ public class FXMLController implements Initializable {
 
     private boolean turn = true; // true == J1's turn
     
+    private int gameType; // 0 = JcJ
+    
     private Grille G1, G2 ;
     
     // optionnel, on devrait pouvoir les passer en parametre de methode
     int directionJ1, directionJ2;
+    
+    @FXML
+    private Button newGame;
+    
+    @FXML
+    private AnchorPane rootPane;
     
     @FXML
     private Label nbcJ1, nbcJ2, scrJ1, scrJ2, scrMaxJ1, scrMaxJ2;
@@ -47,8 +56,7 @@ public class FXMLController implements Initializable {
     @FXML
     private GridPane grilleJ1, grilleJ2;
 
-    @FXML
-    private AnchorPane rootPane;
+
 
     /**
      * Initializes the controller class.
@@ -80,19 +88,123 @@ public class FXMLController implements Initializable {
         System.out.println(G2);
         afficherGrilleJ2();
         
-        //grilleJ1.setGridLinesVisible(true);
-        //grilleJ2.setGridLinesVisible(true);
+       
         
     }
     
+    
 
     @FXML
-    private void undo() {
-            
+    private void gameJcJ() {
+        System.out.println("new Game");
+        
+
+        rootPane.setOnKeyReleased(this::movement);
+        turn = true;
+                
+                
+        nbcJ1.setText("0");
+        nbcJ2.setText("0");
+        scrJ1.setText("0");
+        scrJ2.setText("0");
+        scrMaxJ1.setText("0");
+        scrMaxJ2.setText("0");
+                
+        
+        
+        G1 = new Grille();
+        boolean b = G1.nouvelleCase();
+        b = G1.nouvelleCase();
+        
+        System.out.println(G1);
+        afficherGrilleJ1();
+        
+        G2 = new Grille();
+        b = G2.nouvelleCase();
+        b = G2.nouvelleCase();
+        
+        System.out.println(G2);
+        afficherGrilleJ2();
+    }
+    
+    @FXML
+    private void gameJcIA() {
+        System.out.println("new Game");
+        
+        nbcJ1.setText("0");
+        nbcJ2.setText("0");
+        scrJ1.setText("0");
+        scrJ2.setText("0");
+        scrMaxJ1.setText("0");
+        scrMaxJ2.setText("0");
+                
+        
+        
+        G1 = new Grille();
+        boolean b = G1.nouvelleCase();
+        b = G1.nouvelleCase();
+        
+        System.out.println(G1);
+        afficherGrilleJ1();
+        
+        G2 = new Grille();
+        b = G2.nouvelleCase();
+        b = G2.nouvelleCase();
+        
+        System.out.println(G2);
+        afficherGrilleJ2();
     }
 
     @FXML
     private void movement(KeyEvent e) {
+        KeyCode code = e.getCode();
+        if(turn){//J1 tour
+
+        // un switch aurait été mieux mais ça ne semble pas marcher avec les keycode
+            if(code == KeyCode.Q){
+                
+                directionJ1 = Parametres.GAUCHE;
+                makeMovement(true);
+            }else if(code == KeyCode.S){
+                
+                directionJ1 = Parametres.BAS;
+                makeMovement(true);
+            }else if(code == KeyCode.Z){
+               
+                directionJ1 = Parametres.HAUT;
+                makeMovement(true);
+            }else if(code == KeyCode.D){
+                
+                
+                directionJ1 = Parametres.DROITE;
+                makeMovement(true);
+            }
+
+        //J2 tour
+        }else {
+            if(code == KeyCode.K){
+                
+                directionJ2 = Parametres.GAUCHE;
+                makeMovement(false);
+            }else if(code == KeyCode.O){
+               
+                directionJ2 = Parametres.HAUT;
+                makeMovement(false);
+            }else if(code == KeyCode.L){
+                
+                directionJ2 = Parametres.BAS;
+                makeMovement(false);
+            }else if(code == KeyCode.M){
+                
+                directionJ2 = Parametres.DROITE;
+                makeMovement(false);
+            }
+        }
+        
+    }
+    
+    @FXML
+    private void movementAgainstIA(KeyEvent e) {
         KeyCode code = e.getCode();
         if(turn){//J1 tour
 
@@ -179,7 +291,7 @@ public class FXMLController implements Initializable {
                 
                 //Label l = new Label( Integer.toString(c.getValeur()) );
                 Pane p = new Pane();
-                p.setStyle("-fx-background-color: #004d99");
+                p.setStyle("-fx-background-color: #ff8080");
                 Label l = new Label();
                 l.setContentDisplay(ContentDisplay.CENTER);
                 l.setText(Integer.toString(c.getValeur()));
@@ -189,7 +301,7 @@ public class FXMLController implements Initializable {
             }else if (n instanceof Pane){
                 
                 Pane pane = (Pane)n;
-                pane.setStyle("-fx-background-color: #004d99");
+                pane.setStyle("-fx-background-color: #ff8080");
                 for(Node tmp : pane.getChildren()) {
                     Label lab = (Label) tmp;
                     lab.setText(Integer.toString(c.getValeur()));

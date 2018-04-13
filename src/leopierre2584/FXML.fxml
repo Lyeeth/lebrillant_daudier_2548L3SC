@@ -17,8 +17,7 @@
          <children>
             <ButtonBar layoutX="7.0" prefHeight="40.0" prefWidth="200.0">
                <buttons>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Jouer contre un joueur" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nouvelle partie" wrappingWidth="124.77731704711914" />
+                  <Button fx:id="JcJ" mnemonicParsing="false" onMouseClicked="#gameJcJ" prefHeight="25.0" prefWidth="192.0" text="Jouer contre un joueur" />
                </buttons>
             </ButtonBar>
             <SplitPane dividerPositions="0.5" layoutX="28.0" layoutY="40.0" prefHeight="450.0" prefWidth="693.0">
@@ -77,6 +76,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
+            <Button fx:id="JcIA" layoutX="234.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#gameJcIA" text="JcIA" />
          </children></AnchorPane>
   </content>
 </TitledPane>
