@@ -5,8 +5,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -25,7 +27,7 @@
                   <Image url="@image/background.jpg" />
                </image>
             </ImageView>
-            <SplitPane dividerPositions="0.5" layoutX="28.0" layoutY="40.0" prefHeight="450.0" prefWidth="693.0" style="-fx-background-color: transparent;">
+            <SplitPane dividerPositions="0.5" layoutX="28.0" layoutY="52.0" prefHeight="460.0" prefWidth="693.0" style="-fx-background-color: transparent;">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="402.0" prefWidth="419.0">
                      <children>
@@ -34,8 +36,17 @@
                               <Image url="@image/board.jpg" />
                            </image>
                         </ImageView>
-                      <Button id="UndoJ1" layoutX="24.0" layoutY="363.0" mnemonicParsing="false" text="Undo" />
-                        <Label id="nbCoupJ1" fx:id="nbcJ1" layoutX="101.0" layoutY="69.0" text="Nbc" />
+                      <Button id="UndoJ1" layoutX="24.0" layoutY="363.0" mnemonicParsing="false" text="Undo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Reflection />
+                           </effect></Button>
+                        <Label id="nbCoupJ1" fx:id="nbcJ1" layoutX="101.0" layoutY="69.0" text="Nbc">
+                           <effect>
+                              <Blend />
+                           </effect></Label>
                         <GridPane id="GrilleJ1" fx:id="grilleJ1" layoutX="81.0" layoutY="137.0" prefHeight="179.0" prefWidth="184.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -50,13 +61,32 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <Label id="scoreJ1" fx:id="scrJ1" layoutX="182.0" layoutY="69.0" text="scr" />
-                        <Label id="scoreMaxJ1" fx:id="scrMaxJ1" layoutX="291.0" layoutY="69.0" text="scr max" />
-                        <Text layoutX="50.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coups : " />
-                        <Text layoutX="137.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score :" />
-                        <Text layoutX="222.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score max :" />
-                        <Label layoutX="158.0" layoutY="24.0" text="Joueur 1" />
+                        <Label id="scoreJ1" fx:id="scrJ1" layoutX="182.0" layoutY="69.0" text="scr">
+                           <effect>
+                              <Blend />
+                           </effect></Label>
+                        <Label id="scoreMaxJ1" fx:id="scrMaxJ1" layoutX="291.0" layoutY="69.0" text="scr max">
+                           <effect>
+                              <Blend />
+                           </effect></Label>
+                        <Text layoutX="50.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coups : ">
+                           <effect>
+                              <Blend />
+                           </effect></Text>
+                        <Text layoutX="137.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score :">
+                           <effect>
+                              <Blend />
+                           </effect></Text>
+                        <Text layoutX="222.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score max :">
+                           <effect>
+                              <Blend />
+                           </effect></Text>
+                        <Label layoutX="158.0" layoutY="24.0" text="Joueur 1">
+                           <effect>
+                              <Blend />
+                           </effect></Label>
                         <ImageView fitHeight="475.0" fitWidth="374.0" layoutX="-14.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="toPrint" contentDisplay="CENTER" layoutX="46.0" layoutY="-24.0" opacity="0.0" prefHeight="33.0" prefWidth="128.0" textAlignment="JUSTIFY" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -66,14 +96,41 @@
                               <Image url="@image/board.jpg" />
                            </image>
                         </ImageView>
-                        <Button layoutX="35.0" layoutY="363.0" mnemonicParsing="false" text="Undo" />
-                        <Label id="nbCoupJ2" fx:id="nbcJ2" layoutX="80.0" layoutY="70.0" text="Nbc" />
-                        <Label id="scoreJ2" fx:id="scrJ2" layoutX="161.0" layoutY="70.0" text="scr" />
-                        <Label id="scoreMaxJ2" fx:id="scrMaxJ2" layoutX="270.0" layoutY="70.0" text="scr max" />
-                        <Text layoutX="29.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coups : " />
-                        <Text layoutX="116.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score :" />
-                        <Text layoutX="201.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score max :" />
-                        <Label layoutX="146.0" layoutY="25.0" text="Joueur 2" />
+                        <Button layoutX="35.0" layoutY="363.0" mnemonicParsing="false" text="Undo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Reflection />
+                           </effect></Button>
+                        <Label id="nbCoupJ2" fx:id="nbcJ2" layoutX="80.0" layoutY="70.0" text="Nbc">
+                           <effect>
+                              <Blend />
+                           </effect></Label>
+                        <Label id="scoreJ2" fx:id="scrJ2" layoutX="161.0" layoutY="70.0" text="scr">
+                           <effect>
+                              <Blend />
+                           </effect></Label>
+                        <Label id="scoreMaxJ2" fx:id="scrMaxJ2" layoutX="270.0" layoutY="70.0" text="scr max">
+                           <effect>
+                              <Blend />
+                           </effect></Label>
+                        <Text layoutX="29.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coups : ">
+                           <effect>
+                              <Blend />
+                           </effect></Text>
+                        <Text layoutX="116.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score :">
+                           <effect>
+                              <Blend />
+                           </effect></Text>
+                        <Text layoutX="201.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score max :">
+                           <effect>
+                              <Blend />
+                           </effect></Text>
+                        <Label layoutX="146.0" layoutY="25.0" text="Joueur 2">
+                           <effect>
+                              <Blend />
+                           </effect></Label>
                         <GridPane id="GrilleJ2" fx:id="grilleJ2" layoutX="78.0" layoutY="137.0" prefHeight="179.0" prefWidth="184.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -92,7 +149,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <Button fx:id="JcIA" layoutX="271.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#gameJcIA" text="JcIA aléatoire">
+            <Button fx:id="JcIA" layoutX="579.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameJcIA" text="JcIA aléatoire">
                <effect>
                   <Lighting>
                      <bumpInput>
@@ -104,9 +161,9 @@
                   </Lighting>
                </effect>
                <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
+                  <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button fx:id="JcIALoose" layoutX="375.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#gameJcIALoose" text="JcIA perdante">
+            <Button fx:id="JcIALoose" layoutX="425.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameJcIALoose" text="JcIA perdante">
                <effect>
                   <Lighting>
                      <bumpInput>
@@ -118,9 +175,9 @@
                   </Lighting>
                </effect>
                <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
+                  <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button fx:id="IAvsIA" layoutX="490.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#gameIAvsIA" text="IA versus IA">
+            <Button fx:id="IAvsIA" layoutX="253.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameIAvsIA" text="IA versus IA">
                <effect>
                   <Lighting>
                      <bumpInput>
@@ -132,9 +189,10 @@
                   </Lighting>
                </effect>
                <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
-               </cursor></Button>
-            <Button fx:id="exit" layoutX="621.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit">
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="exit" layoutX="692.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit">
                <effect>
                   <Lighting>
                      <bumpInput>
@@ -146,9 +204,9 @@
                   </Lighting>
                </effect>
                <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
+                  <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button fx:id="JcJ" layoutX="173.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#gameJcJ" prefHeight="25.0" prefWidth="75.0" text="JcJ">
+            <Button fx:id="JcJ" layoutX="76.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameJcJ" prefHeight="25.0" prefWidth="75.0" text="JcJ">
                <effect>
                   <Lighting>
                      <bumpInput>
@@ -160,9 +218,9 @@
                   </Lighting>
                </effect>
                <cursor>
-                  <Cursor fx:constant="OPEN_HAND" />
-               </cursor></Button>
-            <Label fx:id="toPrint" contentDisplay="CENTER" layoutX="28.0" layoutY="2.0" opacity="0.0" prefHeight="33.0" prefWidth="128.0" textAlignment="JUSTIFY" />
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children></AnchorPane>
   </content>
 </TitledPane>
