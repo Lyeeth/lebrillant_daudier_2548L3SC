@@ -30,11 +30,11 @@ public class IALooser{
         if (direction==0){
             direction=1;
         }
-        direction=direction*-1;
+        
         lastgrille = g;
         int n = ThreadLocalRandom.current().nextInt(1, 5);  
         //direction entre 1 et 4
-        System.out.println("Choix direction IA random: "+direction);//débuggage
+        System.out.println("Choix direction IA : "+direction);//débuggage
         return direction;       
     }
    

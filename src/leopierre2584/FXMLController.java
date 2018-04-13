@@ -11,7 +11,10 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
+import javafx.animation.FadeTransition;
 
 
 import javafx.scene.control.Button;
@@ -28,6 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import static leopierre2584.Parametres.TAILLE;
 
 /**
@@ -47,13 +51,13 @@ public class FXMLController implements Initializable {
     int directionJ1, directionJ2;
     
     @FXML
-    private Button Jcj, JcIA, JcIALoose, IAvsIA;
+    private Button Jcj, JcIA, JcIALoose, IAvsIA, exit;
     
     @FXML
     private AnchorPane rootPane;
     
     @FXML
-    private Label nbcJ1, nbcJ2, scrJ1, scrJ2, scrMaxJ1, scrMaxJ2;
+    private Label nbcJ1, nbcJ2, scrJ1, scrJ2, scrMaxJ1, scrMaxJ2, toPrint;
     
     @FXML
     private GridPane grilleJ1, grilleJ2;
@@ -71,6 +75,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void gameJcJ() {
+        
         rootPane.setOnKeyReleased(this::movement);
         newGame();
     }
@@ -83,34 +88,38 @@ public class FXMLController implements Initializable {
     }
     
     @FXML
-    private void gameJcIALoose() {      
+    private void gameJcIALoose() {    
+        
         rootPane.setOnKeyReleased(this::movementAgainstIALooser);
 
         newGame();
     }
     
         @FXML
-    private void gameIAvsIA() {      
+    private void gameIAvsIA() {
+        
         rootPane.setOnKeyReleased(this::movementIAvsIALooser);
 
         newGame();
+        toPrint("appuyer sur une touche", 100);
     }
 
     @FXML
     private void movement(KeyEvent e) {
+        
         KeyCode code = e.getCode();
-        if(turn){//J1 tour
-
+        //if(turn){//J1 tour
         // un switch aurait été mieux mais ça ne semble pas marcher avec les keycode
-            if(code == KeyCode.Q){
-                
+            if(code == KeyCode.Q){             
                 directionJ1 = Parametres.GAUCHE;
                 makeMovement(true);
-            }else if(code == KeyCode.S){
+            } 
+            if(code == KeyCode.S){
                 
                 directionJ1 = Parametres.BAS;
                 makeMovement(true);
-            }else if(code == KeyCode.Z){
+            }
+            if(code == KeyCode.Z){
                
                 directionJ1 = Parametres.HAUT;
                 makeMovement(true);
@@ -120,27 +129,27 @@ public class FXMLController implements Initializable {
                 directionJ1 = Parametres.DROITE;
                 makeMovement(true);
             }
-
         //J2 tour
-        }else {
-            if(code == KeyCode.K){
-                
+            if(code == KeyCode.K){                
                 directionJ2 = Parametres.GAUCHE;
                 makeMovement(false);
-            }else if(code == KeyCode.O){
+            } 
+            if(code == KeyCode.O){
                
                 directionJ2 = Parametres.HAUT;
                 makeMovement(false);
-            }else if(code == KeyCode.L){
+            } 
+            if(code == KeyCode.L){
                 
                 directionJ2 = Parametres.BAS;
                 makeMovement(false);
-            }else if(code == KeyCode.M){
+            } 
+            if(code == KeyCode.M){
                 
                 directionJ2 = Parametres.DROITE;
                 makeMovement(false);
             }
-        }
+        
         
     }
     
@@ -168,13 +177,7 @@ public class FXMLController implements Initializable {
             }
         //IA tour
             int movementChoosed = IaRandom.movechoice();
-            /*try{ 
-            TimeUnit.SECONDS.sleep(1);
-            }catch(InterruptedException ex) 
-            {       
-                System.out.println(ex);
-            }*/
-            
+
             switch(movementChoosed){
                 case 1:
                     directionJ2 = Parametres.GAUCHE;
@@ -201,8 +204,7 @@ public class FXMLController implements Initializable {
     private void movementAgainstIALooser(KeyEvent e) {
         KeyCode code = e.getCode();        
         // un switch aurait été mieux mais ça ne semble pas marcher avec les keycodes
-            if(code == KeyCode.Q){
-                
+            if(code == KeyCode.Q){                
                 directionJ1 = Parametres.GAUCHE;
                 makeMovement(true);
             }else if(code == KeyCode.S){
@@ -221,13 +223,13 @@ public class FXMLController implements Initializable {
             }
         //IA tour
             int movementChoosed = IALooser.movechoice(G2);
+            System.out.println(movementChoosed);
             /*try{ 
             TimeUnit.SECONDS.sleep(1);
             }catch(InterruptedException ex) 
             {       
                 System.out.println(ex);
-            }*/
-            
+            }*/            
             switch(movementChoosed){
                 case 1:
                     directionJ2 = Parametres.GAUCHE;
@@ -253,13 +255,9 @@ public class FXMLController implements Initializable {
     
     @FXML
     private void movementIAvsIALooser(KeyEvent e) {
+        toPrint("appuyer sur une touche", 10000000);
         int movementChoosed = IaRandom.movechoice();
-            /*try{ 
-            TimeUnit.SECONDS.sleep(1);
-            }catch(InterruptedException ex) 
-            {       
-                System.out.println(ex);
-            }*/
+            
             
             switch(movementChoosed){
                 case 1:
@@ -282,12 +280,7 @@ public class FXMLController implements Initializable {
             }
         //IA tour
             movementChoosed = IALooser.movechoice(G2);
-            /*try{ 
-            TimeUnit.SECONDS.sleep(1);
-            }catch(InterruptedException ex) 
-            {       
-                System.out.println(ex);
-            }*/
+           
             
             switch(movementChoosed){
                 case 1:
@@ -471,6 +464,7 @@ private void updateScore(){
 
 
 private void newGame(){
+        toPrint("New game", 3000);
         System.out.println("New Game");
         
         turn = true;
@@ -498,5 +492,38 @@ private void newGame(){
         System.out.println(G2);
         afficherGrilleJ2();
         }
+
+@FXML
+private void exit(){
+    System.exit(0);
+}
+
+
+private void toPrint(String text, int time){
+    toPrint.setText(text);
+    FadeTransition ft = new FadeTransition(Duration.millis(3000), toPrint);
+    ft.setFromValue(0);
+    ft.setToValue(1);
+    ft.play();
+    
+    
+   
+    
+    
+    Timer timer = new Timer();
+
+        TimerTask task = new TimerTask(){
+		public void run(){
+                    System.out.println(".run()");
+			 FadeTransition ft = new FadeTransition(Duration.millis(3000), toPrint);
+                          ft.setFromValue(1);
+                          ft.setToValue(0);
+                          ft.play();
+		}
+	};
+		
+        timer.schedule(task, time);
+    
+}
 
 }
