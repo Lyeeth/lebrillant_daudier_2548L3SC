@@ -16,7 +16,7 @@ public class IaRandom{
         
         int n = ThreadLocalRandom.current().nextInt(1, 5);  
         //direction entre 1 et 4
-        System.out.println("Choix direction IA random: "+n);//débuggage
+        
          return n;       
     }
  
