@@ -19,10 +19,15 @@ public class Grille implements Parametres {
 
     private final HashSet<Case> grille;
     private int valeurMax = 0;
+    private int score = 0;
     private boolean deplacement;
 
     public Grille() {
         this.grille = new HashSet<>();
+    }
+    
+    public HashSet<Case> getGrille(){
+        return grille;
     }
 
     @Override
@@ -51,12 +56,14 @@ public class Grille implements Parametres {
         return result;
     }
 
-    public HashSet<Case> getGrille() {
-        return grille;
-    }
+  
 
     public int getValeurMax() {
         return valeurMax;
+    }
+    
+    public int getScore() {
+        return score;
     }
 
     public boolean partieFinie() {
@@ -98,8 +105,10 @@ public class Grille implements Parametres {
         return deplacement;
     }
 
-    private void fusion(Case c) {
-        c.setValeur(c.getValeur() * 2);
+    private void fusion(Case c, Case cToBeDelete) {
+        System.out.println("fusiiiiiiiiiioooooooon");
+        this.score = score + c.getValeur() + cToBeDelete.getValeur();
+        c.setValeur(c.getValeur() + cToBeDelete.getValeur());
         if (this.valeurMax < c.getValeur()) {
             this.valeurMax = c.getValeur();
         }
@@ -107,11 +116,14 @@ public class Grille implements Parametres {
     }
 
     private void deplacerCasesRecursif(Case[] extremites, int rangee, int direction, int compteur) {
+       
         if (extremites[rangee] != null) {
+           
             if ((direction == HAUT && extremites[rangee].getY() != compteur)
                     || (direction == BAS && extremites[rangee].getY() != TAILLE - 1 - compteur)
                     || (direction == GAUCHE && extremites[rangee].getX() != compteur)
                     || (direction == DROITE && extremites[rangee].getX() != TAILLE - 1 - compteur)) {
+               
                 this.grille.remove(extremites[rangee]);
                 switch (direction) {
                     case HAUT:
@@ -132,14 +144,24 @@ public class Grille implements Parametres {
             }
             Case voisin = extremites[rangee].getVoisinDirect(-direction);
             if (voisin != null) {
-                if (extremites[rangee].valeurFib(voisin)) {
-                    this.fusion(extremites[rangee]);
+                
+                if (extremites[rangee].valeurFib(voisin)) { // verifier valeurFib
+                  
+                   
+                    this.fusion(extremites[rangee], voisin);
+                    
                     extremites[rangee] = voisin.getVoisinDirect(-direction);
+                   
                     this.grille.remove(voisin);
+                   
                     this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
+                   
                 } else {
+                    
                     extremites[rangee] = voisin;
+                    
                     this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
+                  
                 }
             }
         }

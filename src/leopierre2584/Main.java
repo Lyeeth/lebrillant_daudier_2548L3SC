@@ -24,14 +24,23 @@ public class Main implements Parametres {
         
         //test
         
-        System.out.println(fibap(1));
-        System.out.println(fibav(1));
+        //System.out.println(fibap(1));
+        //System.out.println(fibav(1));
         //fintest
-        
+        System.out.println("ceci n'est jamais sensé s'afficher");
         Grille g = new Grille();
         boolean b = g.nouvelleCase();
         b = g.nouvelleCase();
+        System.out.println("J1");
         System.out.println(g);
+        
+        Grille gJ2 = new Grille();
+        boolean bJ2 = g.nouvelleCase();
+        bJ2 = gJ2.nouvelleCase();
+        System.out.println("J2");
+        System.out.println(gJ2);
+        
+        
         Scanner sc = new Scanner(System.in);
         /*System.out.println("X:");
         int x= sc.nextInt();
@@ -43,8 +52,15 @@ public class Main implements Parametres {
         g.getGrille().remove(c);
         System.out.println(g);*/
         
-        while (!g.partieFinie()) {
-            System.out.println("Déplacer vers la Droite (d), Gauche (g), Haut (h), ou Bas (b) ?");
+        boolean changementDeTour = true;
+        
+        
+        while (!g.partieFinie() && !gJ2.partieFinie()) {
+            
+            if(changementDeTour){
+               changementDeTour = !changementDeTour;
+            // tour du joueur 1
+            System.out.println("J1 :Déplacer vers la Droite (d), Gauche (g), Haut (h), ou Bas (b) ?");
             String s = sc.nextLine();
             s.toLowerCase();
             if (!(s.equals("d") || s.equals("droite")
@@ -53,26 +69,78 @@ public class Main implements Parametres {
                     || s.equals("b") || s.equals("bas"))) {
                 System.out.println("Vous devez écrire d pour Droite, g pour Gauche, h pour Haut ou b pour Bas");
             } else {
-                int direction;
-                if (s.equals("d") || s.equals("droite")) {
-                    direction = DROITE;
-                } else if (s.equals("g") || s.equals("gauche")) {
-                    direction = GAUCHE;
-                } else if (s.equals("h") || s.equals("haut")) {
-                    direction = HAUT;
+                    int direction;
+                    if (s.equals("d") || s.equals("droite")) {
+                        direction = DROITE;
+                    } else if (s.equals("g") || s.equals("gauche")) {
+                        direction = GAUCHE;
+                    } else if (s.equals("h") || s.equals("haut")) {
+                        direction = HAUT;
+                    } else {
+                        direction = BAS;
+                    }
+                    boolean b2 = g.lanceurDeplacerCases(direction);
+                    
+                    if (b2) {
+                        b = g.nouvelleCase();
+                        System.out.println(b);
+                        if (!b) g.gameOver();
+                    }
+                    System.out.println("J1");
+                    System.out.println(g);
+                    System.out.println("J2");
+                    System.out.println(gJ2);
+                    if (g.getValeurMax()>=OBJECTIF) g.victory();
+                    }
+                     //g.gameOver();
+        
+        }else{
+                // tour du joueur 2
+                changementDeTour = !changementDeTour;
+                
+                System.out.println("J2 : Déplacer vers la Droite (d), Gauche (g), Haut (h), ou Bas (b) ?");
+                String s = sc.nextLine();
+                s.toLowerCase();
+                if (!(s.equals("d") || s.equals("droite")
+                        || s.equals("g") || s.equals("gauche")
+                        || s.equals("h") || s.equals("haut")
+                        || s.equals("b") || s.equals("bas"))) {
+                    System.out.println("Vous devez écrire d pour Droite, g pour Gauche, h pour Haut ou b pour Bas");
                 } else {
-                    direction = BAS;
+                    int direction;
+                    if (s.equals("d") || s.equals("droite")) {
+                        direction = DROITE;
+                    } else if (s.equals("g") || s.equals("gauche")) {
+                        direction = GAUCHE;
+                    } else if (s.equals("h") || s.equals("haut")) {
+                        direction = HAUT;
+                    } else {
+                        direction = BAS;
+                    }
+                    boolean b2Bis = gJ2.lanceurDeplacerCases(direction);
+                    if (b2Bis) {
+                        bJ2 = gJ2.nouvelleCase();
+                        if (!bJ2) gJ2.gameOver();
+                    }
+                    // on pourrait||devrait faire une fonction afficher
+            
+                    System.out.println("J1");
+                    System.out.println(g);
+                    System.out.println("J2");
+                    System.out.println(gJ2);
+                    
+                    
+                    if (gJ2.getValeurMax()>=OBJECTIF) gJ2.victory();
                 }
-                boolean b2 = g.lanceurDeplacerCases(direction);
-                if (b2) {
-                    b = g.nouvelleCase();
-                    if (!b) g.gameOver();
-                }
-                System.out.println(g);
-                if (g.getValeurMax()>=OBJECTIF) g.victory();
             }
+            //gJ2.gameOver();
+        
+                
+                
         }
-        g.gameOver();
+        
+        
+        
         /*
         // Bout de code pour tester manuellement si une grille contient une case ou pas
         Scanner sc = new Scanner(System.in);

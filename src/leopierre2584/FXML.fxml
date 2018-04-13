@@ -11,22 +11,23 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="743.0" text="Game" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="743.0" text="MrChocolat4Ever" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="leopierre2584.FXMLController">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="745.0">
+    <AnchorPane fx:id="rootPane" minHeight="0.0" minWidth="0.0" onKeyReleased="#movement" prefHeight="513.0" prefWidth="745.0">
          <children>
             <ButtonBar layoutX="7.0" prefHeight="40.0" prefWidth="200.0">
                <buttons>
-                  <Button mnemonicParsing="false" text="Jouer contre un joueur" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nouvelle partie" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Jouer contre un joueur" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nouvelle partie" wrappingWidth="124.77731704711914" />
                </buttons>
             </ButtonBar>
             <SplitPane dividerPositions="0.5" layoutX="28.0" layoutY="40.0" prefHeight="450.0" prefWidth="693.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="419.0">
                      <children>
-                      <Button layoutX="24.0" layoutY="363.0" mnemonicParsing="false" text="Undo" />
-                        <GridPane layoutX="81.0" layoutY="137.0" prefHeight="179.0" prefWidth="184.0">
+                      <Button id="UndoJ1" layoutX="24.0" layoutY="363.0" mnemonicParsing="false" text="Undo" />
+                        <Label id="nbCoupJ1" fx:id="nbcJ1" layoutX="101.0" layoutY="69.0" text="Nbc" />
+                        <GridPane id="GrilleJ1" fx:id="grilleJ1" layoutX="81.0" layoutY="137.0" prefHeight="179.0" prefWidth="184.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,9 +41,8 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <Label layoutX="101.0" layoutY="69.0" text="Nbc" />
-                        <Label layoutX="182.0" layoutY="69.0" text="scr" />
-                        <Label layoutX="291.0" layoutY="69.0" text="scr max" />
+                        <Label id="scoreJ1" fx:id="scrJ1" layoutX="182.0" layoutY="69.0" text="scr" />
+                        <Label id="scoreMaxJ1" fx:id="scrMaxJ1" layoutX="291.0" layoutY="69.0" text="scr max" />
                         <Text layoutX="50.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coups : " />
                         <Text layoutX="137.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score :" />
                         <Text layoutX="222.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score max :" />
@@ -52,7 +52,14 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
                         <Button layoutX="35.0" layoutY="363.0" mnemonicParsing="false" text="Undo" />
-                        <GridPane layoutX="78.0" layoutY="137.0" prefHeight="179.0" prefWidth="184.0">
+                        <Label id="nbCoupJ2" fx:id="nbcJ2" layoutX="80.0" layoutY="70.0" text="Nbc" />
+                        <Label id="scoreJ2" fx:id="scrJ2" layoutX="161.0" layoutY="70.0" text="scr" />
+                        <Label id="scoreMaxJ2" fx:id="scrMaxJ2" layoutX="270.0" layoutY="70.0" text="scr max" />
+                        <Text layoutX="29.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coups : " />
+                        <Text layoutX="116.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score :" />
+                        <Text layoutX="201.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score max :" />
+                        <Label layoutX="146.0" layoutY="25.0" text="Joueur 2" />
+                        <GridPane id="GrilleJ2" fx:id="grilleJ2" layoutX="78.0" layoutY="137.0" prefHeight="179.0" prefWidth="184.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,13 +73,6 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <Label layoutX="80.0" layoutY="70.0" text="Nbc" />
-                        <Label layoutX="161.0" layoutY="70.0" text="scr" />
-                        <Label layoutX="270.0" layoutY="70.0" text="scr max" />
-                        <Text layoutX="29.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coups : " />
-                        <Text layoutX="116.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score :" />
-                        <Text layoutX="201.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score max :" />
-                        <Label layoutX="146.0" layoutY="25.0" text="Joueur 2" />
                      </children>
                   </AnchorPane>
               </items>

@@ -19,18 +19,23 @@ public class Leopierre2584 extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
+
         stage.show();
+        
+      
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //System.out.println( System.getProperties()); probleme de warning avec le JDK et JavaFX
         launch(args);
     }
     

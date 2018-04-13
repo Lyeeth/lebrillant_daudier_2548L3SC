@@ -130,13 +130,15 @@ public class Case implements Parametres {
     }
  public boolean valeurFib(Case c) {
         if (c != null) {
-            return ((this.valeur == fibav(c.valeur))||(this.valeur == fibap(c.valeur))||(this.valeur ==1)&&(c.valeur==1));
+            return ((this.valeur == fibav(c.valeur))||(this.valeur == fibap(c.valeur))||( (this.valeur ==1)&&(c.valeur==1)) || ((this.valeur ==2)&&(c.valeur==1)) ) ;
         } else {
             return false;
         }
  }
 public static long fibonacci(int n, long a, long b) {
+      //System.out.println("fib : " + n +"   " + a + "   " + b);
       return (n > 0) ? fibonacci(n - 1, b, a + b) : a;       
   }
+
 
 }
