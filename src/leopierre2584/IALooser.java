@@ -17,7 +17,7 @@ public class IALooser{
     static int direction;
     public static int movechoice(Grille g){
         
-        if (lastgrille.grille!=null){
+        if (lastgrille!=null){
             if (lastgrille==g){
                 if ((abs(direction))==1){
                     direction = 2;
