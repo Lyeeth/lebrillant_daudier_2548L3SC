@@ -5,20 +5,36 @@
  */
 package leopierre2584;
 
+import static java.lang.Math.abs;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  *
  * @author daudi
  */
-public class IALooser extends Joueur{
-    
-    public boolean move(){
-        System.out.println("leopierre2584.IALooser.move()");
-        //direction = random.between1et4
-         return false;       
+public class IALooser{
+    static Grille lastgrille;
+    static int direction;
+    public static int movechoice(Grille g){
+        
+        if (lastgrille.grille!=null){
+            if (lastgrille==g){
+                if ((abs(direction))==1){
+                    direction = 2;
+                }else{
+                    direction = 1;
+                }
+            }
+        }
+        if (direction==0){
+            direction=1;
+        }
+        direction=direction*-1;
+        lastgrille = g;
+        int n = ThreadLocalRandom.current().nextInt(1, 5);  
+        //direction entre 1 et 4
+        System.out.println("Choix direction IA random: "+direction);//débuggage
+         return direction;       
     }
-    
-    public boolean setMove(){
-        System.out.println("leopierre2584.IALooser.move()");
-        return false;       
-    }
+   
 }
