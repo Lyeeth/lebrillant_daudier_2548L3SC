@@ -106,7 +106,7 @@ public class Grille implements Parametres {
     }
 
     private void fusion(Case c, Case cToBeDelete) {
-        System.out.println("fusiiiiiiiiiioooooooon");
+        //System.out.println("fusiiiiiiiiiioooooooon");
         this.score = score + c.getValeur() + cToBeDelete.getValeur();
         c.setValeur(c.getValeur() + cToBeDelete.getValeur());
         if (this.valeurMax < c.getValeur()) {

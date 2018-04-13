@@ -69,10 +69,14 @@ public class FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("initialize");
+        
         newGame();
     }
 
+    /**
+     * methode appellé quand le bouton JcJ est cliqué
+     * reinitialise la grille et l'affichage et change le listener de l'anchorpane
+     */
     @FXML
     private void gameJcJ() {
         
@@ -80,6 +84,10 @@ public class FXMLController implements Initializable {
         newGame();
     }
     
+     /**
+     * methode appellé quand le bouton JcIA aléatoire est cliqué
+     * reinitialise la grille et l'affichage et change le listener de l'anchorpane
+     */
     @FXML
     private void gameJcIA() {      
         rootPane.setOnKeyReleased(this::movementAgainstIARandom);
@@ -87,6 +95,10 @@ public class FXMLController implements Initializable {
         newGame();
     }
     
+    /**
+     * methode appellé quand le bouton JcIA perdante est cliqué
+     * reinitialise la grille et l'affichage et change le listener de l'anchorpane
+     */
     @FXML
     private void gameJcIALoose() {    
         
@@ -95,7 +107,11 @@ public class FXMLController implements Initializable {
         newGame();
     }
     
-        @FXML
+    /**
+     * methode appellé quand le bouton IAvsIA  est cliqué
+     * reinitialise la grille et l'affichage et change le listener de l'anchorpane
+     */
+    @FXML
     private void gameIAvsIA() {
         
         rootPane.setOnKeyReleased(this::movementIAvsIALooser);
@@ -104,6 +120,12 @@ public class FXMLController implements Initializable {
         toPrint("appuyer sur une touche", 100);
     }
 
+       /**
+        * methode qui gere les mouvements lors d'un JcJ
+        * analyse la touche préssée, applique une direction en fonction de la touche 
+        * et appelle makeMovement pour "effectuer" le mouvement
+        * @param e l'event représantant la touche pressée
+        */
     @FXML
     private void movement(KeyEvent e) {
         
@@ -153,6 +175,13 @@ public class FXMLController implements Initializable {
         
     }
     
+    /**
+     * methode qui gere les mouvements lors d'un JcIA aléatoire
+     * analyse la touche préssée, applique une direction en fonction de la touche 
+     * et appelle makeMovement pour "effectuer" le mouvement
+     * Appel la fonction static de IaRandom pour générer une direction aléatoire
+     * @param e l'event représantant la touche pressée
+     */
     @FXML
     private void movementAgainstIARandom(KeyEvent e) {
         KeyCode code = e.getCode();        
@@ -200,6 +229,13 @@ public class FXMLController implements Initializable {
         
     }
     
+      /**
+     * methode qui gere les mouvements lors d'un JcIA perdante
+     * analyse la touche préssée, applique une direction en fonction de la touche 
+     * et appelle makeMovement pour "effectuer" le mouvement
+     * Appel la fonction static de IALooser pour générer une direction 
+     * @param e l'event représantant la touche pressée
+     */
     @FXML
     private void movementAgainstIALooser(KeyEvent e) {
         KeyCode code = e.getCode();        
@@ -223,13 +259,8 @@ public class FXMLController implements Initializable {
             }
         //IA tour
             int movementChoosed = IALooser.movechoice(G2);
-            System.out.println(movementChoosed);
-            /*try{ 
-            TimeUnit.SECONDS.sleep(1);
-            }catch(InterruptedException ex) 
-            {       
-                System.out.println(ex);
-            }*/            
+
+          
             switch(movementChoosed){
                 case 1:
                     directionJ2 = Parametres.GAUCHE;
@@ -252,7 +283,13 @@ public class FXMLController implements Initializable {
         
     }
     
-    
+    /**
+     * methode qui gere les mouvements des deux IA lors d'un match entre les IAs
+     * appel les deux fonctions des IA rerspectives afin de générer deux mouvements
+     * et appelle makeMovement pour "effectuer" le mouvement
+     * chaque fois qu'une touche du clavier est préssé une IA effectue un mouvement
+     * @param e l'event représantant la touche pressée
+     */
     @FXML
     private void movementIAvsIALooser(KeyEvent e) {
         toPrint("appuyer sur une touche", 10000000);
@@ -305,33 +342,71 @@ public class FXMLController implements Initializable {
     }
     
     
-    // ici on met à jour le modele (i.e les grilles)
+    /**
+     * méthode effectuant et affichant le mouvement sauvegardé dans directionJ1 et directionJ2
+     * la grille est mise à jour avant de mettre à jour l'affichage
+     * afficherGrilleJ1/J2 met à jour l'affichage
+     * @param J1turn un boolean permettant de savoir si le mouvement à effectué par le J1 ou le J2
+     */
     private void makeMovement(boolean J1turn){
-            
+       
         if(J1turn){
             boolean bLanceur = G1.lanceurDeplacerCases(directionJ1);
                     
             if (bLanceur) {
                 boolean b = G1.nouvelleCase();
-                if (!b) 
-                    G1.gameOver();
+                if (!b) {
+                    toPrint("J1 perd", 1000);
+                    finDePartie();
+                     
+                }
+                if(G1.getValeurMax() >= Parametres.OBJECTIF){
+                    toPrint("J1 gagne", 1000);
+                    finDePartie();
+                }      
             }
+            updateScore(true);
             afficherGrilleJ1();
                 
         }else{//J2 tour
             boolean bLanceur = G2.lanceurDeplacerCases(directionJ2);
             if (bLanceur) {
                 boolean b = G2.nouvelleCase();
-                if (!b) 
-                    G2.gameOver();
+                if (!b){
+                    toPrint("J2 perd", 1000);
+                    finDePartie();
+                     
                 }
-                afficherGrilleJ2();  
+                if(G2.getValeurMax() >= Parametres.OBJECTIF){
+                    toPrint("J2 gagne", 1000);
+                    finDePartie();
+                }    
+                }
+            updateScore(false);
+            afficherGrilleJ2();  
         }
-        updateScore();
+        
         turn = !turn;
    
     }
     
+    private void finDePartie(){
+        rootPane.setOnKeyReleased(this::gameEnded);
+        
+        
+    }
+    
+    @FXML
+    private void gameEnded(KeyEvent e){
+        toPrint("partie terminé", 1000);
+    }
+    
+    /**
+     * reset la gridpane puis parcours le model de la grille
+     * créer un label et un pane ou met à jour le label 
+     * en fonction du contenu du model grille
+     * fonctionne pour la grille J1.
+     */
     private void afficherGrilleJ1(){
         HashSet<Case> modeleGrille = G1.getGrille();
         clearGridpaneLabelsJ1();
@@ -367,6 +442,13 @@ public class FXMLController implements Initializable {
         }  
     }
     
+       /**
+     * reset la gridpane puis parcours le model de la grille
+     * créer un label et un pane ou met à jour le label 
+     * en fonction du contenu du model grille
+     * fonctionne pour la grille J2
+     * aurait pu etre fusionner avec afficherGrilleJ1 si plus de temps ...
+     */
         private void afficherGrilleJ2(){
         HashSet<Case> modeleGrille = G2.getGrille();
         clearGridpaneLabelsJ2();
@@ -402,8 +484,12 @@ public class FXMLController implements Initializable {
         }  
     }
     
-    // reinitialise tous les lables de la grille
-    private void clearGridpaneLabelsJ1(){
+        /**
+         * reinitialise les labels de la grille à ""
+         * et rend invisible les pane de background
+         * fonctionne pour J1
+         */
+        private void clearGridpaneLabelsJ1(){
         for(Node p : grilleJ1.getChildren()){
             if (p instanceof Pane){
                 Pane pane = (Pane)p;
@@ -417,7 +503,12 @@ public class FXMLController implements Initializable {
         }
     }
     
-        // reinitialise tous les lables de la grille
+          /**
+         * reinitialise les labels de la grille à ""
+         * et rend invisible les pane de background
+         * fonctionne pour J2
+         * Aurait pu etre fusionné avec clearGridpaneLabelsJ1 si plus de temps...
+         */
     private void clearGridpaneLabelsJ2(){
         for(Node p : grilleJ2.getChildren()){
            if (p instanceof Pane){
@@ -432,6 +523,13 @@ public class FXMLController implements Initializable {
         }
     }
     
+    /**
+     * renvoie un node d'une gridPane
+     * @param gridPane la gridPane sur laquelle la recherche est faite
+     * @param col la colonne de l'élément recherché
+     * @param row la ligne de l'élément recherché
+     * @return l'élément recherché en Node ou null si rien n'est trouvé
+     */
     private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
        
     for (Node node : gridPane.getChildren()) {
@@ -443,9 +541,11 @@ public class FXMLController implements Initializable {
     return null;
     }
     
-    
-private void updateScore(){
-        if(turn){
+    /**
+     * met à jour les différents score
+     */
+private void updateScore(boolean J1turn){
+        if(J1turn){
             int nbc = Integer.parseInt(nbcJ1.getText())+1;
             nbcJ1.setText(Integer.toString(nbc));
             
@@ -462,10 +562,12 @@ private void updateScore(){
     }
 
 
-
+/**
+ * inialise la grille et l'affichage commun d'une nouvelle partie, quelle que soit le mode de jeu
+ */
 private void newGame(){
         toPrint("New game", 3000);
-        System.out.println("New Game");
+
         
         turn = true;
         
@@ -482,39 +584,42 @@ private void newGame(){
         boolean b = G1.nouvelleCase();
         b = G1.nouvelleCase();
         
-        System.out.println(G1);
+
         afficherGrilleJ1();
         
         G2 = new Grille();
         b = G2.nouvelleCase();
         b = G2.nouvelleCase();
         
-        System.out.println(G2);
+
         afficherGrilleJ2();
         }
 
+/**
+ * quitte l'application
+ */
 @FXML
 private void exit(){
     System.exit(0);
 }
 
-
+/**
+ * dans un label situé en haut à droite afficher en fade in fade out du texte
+ * @param text le texte à afficher
+ * @param time le temps avant de lancer le fade out du texte
+ */
 private void toPrint(String text, int time){
     toPrint.setText(text);
     FadeTransition ft = new FadeTransition(Duration.millis(3000), toPrint);
     ft.setFromValue(0);
     ft.setToValue(1);
     ft.play();
-    
-    
-   
-    
-    
+
     Timer timer = new Timer();
 
         TimerTask task = new TimerTask(){
 		public void run(){
-                    System.out.println(".run()");
+
 			 FadeTransition ft = new FadeTransition(Duration.millis(3000), toPrint);
                           ft.setFromValue(1);
                           ft.setToValue(0);
