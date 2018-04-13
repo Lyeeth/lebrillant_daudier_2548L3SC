@@ -4,22 +4,21 @@
  * and open the template in the editor.
  */
 package leopierre2584;
-
+import java.util.concurrent.ThreadLocalRandom;
 /**
  *
  * @author daudi
  */
 
-public class IaRandom extends Joueur{
+public class IaRandom{
     
-   public boolean move(){
-        System.out.println("leopierre2584.IALooser.move()");
-        //direction = random.between1et4
-         return false;       
+   public static int movechoice(){
+        
+        int n = ThreadLocalRandom.current().nextInt(1, 5);  
+        //direction entre 1 et 4
+        System.out.println("Choix direction IA random: "+n);//débuggage
+         return n;       
     }
-    
-    public boolean setMove(){
-        System.out.println("leopierre2584.IALooser.move()");
-        return false;       
-    }
+ 
+            
 }

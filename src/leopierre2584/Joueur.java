@@ -20,9 +20,9 @@ public abstract class Joueur {
         
     }
     
-    public abstract boolean move();
+    //public abstract boolean move();
     
-    public abstract boolean setMove();
+   // public abstract boolean setMove();
 
     
     /*

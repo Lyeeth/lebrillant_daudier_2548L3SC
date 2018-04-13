@@ -17,7 +17,7 @@ import java.util.Random;
  */
 public class Grille implements Parametres {
 
-    private final HashSet<Case> grille;
+    final HashSet<Case> grille;
     private int valeurMax = 0;
     private int score = 0;
     private boolean deplacement;
