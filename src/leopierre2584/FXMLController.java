@@ -294,25 +294,25 @@ public class FXMLController implements Initializable {
     private void movementIAvsIALooser(KeyEvent e) {
         toPrint("appuyer sur une touche", 10000000);
         int movementChoosed = IaRandom.movechoice();
-            
+        System.out.println(movementChoosed);    
             
             switch(movementChoosed){
                 case 1:
-                    directionJ2 = Parametres.GAUCHE;
-                    makeMovement(false);
+                    directionJ1 = Parametres.GAUCHE;
+                    makeMovement(true);
                     break;
                 case 2:
-                    directionJ2 = Parametres.DROITE;
-                    makeMovement(false);
+                    directionJ1 = Parametres.DROITE;
+                    makeMovement(true);
                     break;
                 case 3:
-                    directionJ2 = Parametres.HAUT;
-                    makeMovement(false);
+                    directionJ1 = Parametres.HAUT;
+                    makeMovement(true);
                     break;
                     
                 case 4:
-                    directionJ2 = Parametres.BAS;
-                    makeMovement(false);
+                    directionJ1 = Parametres.BAS;
+                    makeMovement(true);
                     break;
             }
         //IA tour
@@ -418,7 +418,7 @@ public class FXMLController implements Initializable {
                 
                 //Label l = new Label( Integer.toString(c.getValeur()) );
                 Pane p = new Pane();
-                p.setStyle("-fx-background-color: #ff8080");
+                p.setStyle("-fx-background-color: #d9f2d9");
                 Label l = new Label();
                 l.setContentDisplay(ContentDisplay.CENTER);
                 l.setText(Integer.toString(c.getValeur()));
@@ -428,7 +428,7 @@ public class FXMLController implements Initializable {
             }else if (n instanceof Pane){
                 
                 Pane pane = (Pane)n;
-                pane.setStyle("-fx-background-color: #ff8080");
+                pane.setStyle("-fx-background-color: #d9f2d9");
                 for(Node tmp : pane.getChildren()) {
                     Label lab = (Label) tmp;
                     lab.setText(Integer.toString(c.getValeur()));
@@ -460,7 +460,7 @@ public class FXMLController implements Initializable {
                 
                 //Label l = new Label( Integer.toString(c.getValeur()) );
                 Pane p = new Pane();
-                p.setStyle("-fx-background-color: #ff8080");
+                p.setStyle("-fx-background-color: #d9f2d9");
                 Label l = new Label();
                 l.setContentDisplay(ContentDisplay.CENTER);
                 l.setText(Integer.toString(c.getValeur()));
@@ -470,7 +470,7 @@ public class FXMLController implements Initializable {
             }else if (n instanceof Pane){
                 
                 Pane pane = (Pane)n;
-                pane.setStyle("-fx-background-color: #ff8080");
+                pane.setStyle("-fx-background-color: #d9f2d9");
                 for(Node tmp : pane.getChildren()) {
                     Label lab = (Label) tmp;
                     lab.setText(Integer.toString(c.getValeur()));

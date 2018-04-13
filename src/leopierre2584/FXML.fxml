@@ -163,7 +163,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button fx:id="JcIALoose" layoutX="425.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameJcIALoose" text="JcIA perdante">
+            <Button fx:id="JcIALoose" layoutX="451.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameJcIALoose" text="JcIA perdante">
                <effect>
                   <Lighting>
                      <bumpInput>
@@ -177,7 +177,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button fx:id="IAvsIA" layoutX="253.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameIAvsIA" text="IA versus IA">
+            <Button fx:id="IAvsIA" layoutX="316.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameIAvsIA" text="IA versus IA">
                <effect>
                   <Lighting>
                      <bumpInput>
@@ -206,7 +206,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button fx:id="JcJ" layoutX="76.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameJcJ" prefHeight="25.0" prefWidth="75.0" text="JcJ">
+            <Button fx:id="JcJ" layoutX="183.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#gameJcJ" prefHeight="25.0" prefWidth="75.0" text="JcJ">
                <effect>
                   <Lighting>
                      <bumpInput>
@@ -221,6 +221,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Label fx:id="toPrint" layoutX="28.0" layoutY="13.0" prefHeight="28.0" prefWidth="133.0" textFill="#f52323" />
          </children></AnchorPane>
   </content>
 </TitledPane>
